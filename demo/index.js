@@ -8,5 +8,6 @@ import 'font-awesome/css/font-awesome.css';
 
 import 'yrui/lib/yrui.css';
 import './styles/stheme.less';
+import 'antd/dist/antd.min.css';
 
 render(<Router history={hashHistory} routes={routes} />,document.getElementById('app'));
