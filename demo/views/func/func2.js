@@ -181,6 +181,7 @@ export default class Func2 extends React.Component {
             id: '0',
             title: "吃饭1",
             start: "2017-02-08 09:00",
+            content:'吃完了就睡',
             end: null,
             allDay: false,
             color: "#360"
@@ -231,9 +232,8 @@ export default class Func2 extends React.Component {
               today:'返回今天',
             },
             drop: function(starttime) {
-              // is the "remove after drop" checkbox checked?
+                console.log($(this).data('event'));
               if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
                 $(this).remove();
               }
               const title = $(this).text();
@@ -295,10 +295,10 @@ export default class Func2 extends React.Component {
             // },
             eventClick: function(calEvent, jsEvent, view) { //点击某一个事件
               console.log(calEvent);
-                const { _allDay, _end, _id, _start, start, end, title, color, allDay, id } = calEvent;
+                const { _allDay, _end, _id, _start, start, content,end, title, color, allDay, id } = calEvent;
                 const isEnd = !!end;
                 that.setState({
-                    action: 'edit',
+                    action: 'check',
                     _allDay,
                     _end,
                     _id,
