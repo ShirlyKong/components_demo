@@ -1,0 +1,20 @@
+.vp20 {
+    padding: 20px 0px;
+}
+
+.vm20 {
+    margin: 20px 0px;
+}
+
+.red {
+    color: red;
+}
+
+.redbg {
+    background-color: red;
+}
+
+.txt {
+    line-height: 1.5;
+    font-size: 14px;
+}
