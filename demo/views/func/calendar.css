@@ -1,0 +1,62 @@
+th.fc-day-header.fc-widget-header {
+    padding: 4px;
+    border-bottom: 1px solid #ddd;
+}
+
+.fc td,
+.fc th {
+    border-width: 0px;
+}
+
+th.fc-day-header.fc-widget-header>span {
+    display: block;
+    padding-top: 10px;
+    text-align: right;
+}
+
+th.fc-day-header.fc-widget-header,
+td.fc-day.fc-widget-content {
+    //  border: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    // border-radius: 10px;
+}
+
+#calendar table {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+#calendar .fc-view>table,
+#calendar .fc-view>table>thead>tr>td table,
+.fc-content-skeleton>table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.fc-view>table>thead>tr>td.fc-head-container.fc-widget-header,
+.fc-view>table>tbody>tr>td.fc-widget-content {
+    border-color: transparent;
+}
+
+.fc-basic-view .fc-day-number,
+.fc-basic-view .fc-week-number {
+    padding: 8px;
+    padding-bottom: 2px;
+}
+
+span.fc-day-number {
+    font-size: 15px;
+}
+
+.fc-unthemed td.fc-today {
+    background: #e3f7fc;
+    border-top: 2px solid #0094ff;
+}
+
+a.fc-day-grid-event {
+    padding: 2px 4px;
+}
+
+a.fc-day-grid-event.fc-h-event.fc-event >span {
+    font-size: 12px
+}
