@@ -207,6 +207,20 @@ export default class Func2 extends React.Component {
                 agenda: .5,
                 '': .6
             },
+            isRTL: false,
+            firstDay: 0,
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+            dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            buttonText: {
+                prev: "<",
+                next: ">",
+                today: '返回今天',
+                month: '月',
+                week: '周',
+                day: '日'
+            },
             eventDrop: function(event) {
                 let { title, allDay, color, id, start, end } = event;
 

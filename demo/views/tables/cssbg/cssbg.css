@@ -1,0 +1,134 @@
+        .box-body {
+            overflow: hidden;
+        }
+        
+        .box {
+            width: 220px;
+            height: 160px;
+            float: left;
+            margin-top: 25px;
+            margin-left: 20px;
+        }
+        
+        .bg1 {
+            background: linear-gradient(#fb3 30%, #58a 30%);
+            background-size: 100% 30px;
+        }
+        
+        .bg2 {
+            background: linear-gradient(#fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);
+            background-size: 100% 45px
+        }
+        
+        .bg3 {
+            background: linear-gradient(to right, #fb3 50%, #58a 0);
+            /* 或 90deg */
+            background-size: 30px 100%;
+        }
+        
+        .bg4 {
+            background: linear-gradient(45deg, #fb3 50%, #58a 0);
+            background-size: 30px 30px;
+        }
+        
+        .bg5 {
+            background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75%, #58a 0);
+            background-size: 30px 30px;
+        }
+        
+        .bg6 {
+            background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75%, #58a 0);
+            background-size: 42.426406871px 42.426406871px;
+        }
+        
+        .bg7 {
+            background: repeating-linear-gradient(45deg, #fb3, #58a 30px);
+        }
+        
+        .bg8 {
+            background: repeating-linear-gradient(60deg, #fb3, #fb3 15px, #58a 0, #58a 30px);
+        }
+        
+        .bg9 {
+            background: repeating-linear-gradient(30deg, #79b, #79b 15px, #58a 0, #58a 30px);
+        }
+        
+        .bg10 {
+            background: #58a;
+            background-image: repeating-linear-gradient(30deg, hsla(0, 0%, 100%, .1), hsla(0, 0%, 100%, .1) 15px, transparent 0, transparent 30px);
+        }
+        
+        .bg21 {
+            background: white;
+            background-image: linear-gradient(90deg, rgba(200, 0, 0, .5) 50%, transparent 0), linear-gradient( rgba(200, 0, 0, .5) 50%, transparent 0);
+            background-size: 30px 30px;
+        }
+        
+        .bg22 {
+            background: #58a;
+            background-image: linear-gradient(white 1px, transparent 0), linear-gradient(90deg, white 1px, transparent 0);
+            background-size: 30px 30px;
+        }
+        
+        .bg23 {
+            background: #58a;
+            background-image: linear-gradient(white 2px, transparent 0), linear-gradient(90deg, white 2px, transparent 0), linear-gradient(hsla(0, 0%, 100%, .3) 1px, transparent 0), linear-gradient(90deg, hsla(0, 0%, 100%, .3) 1px, transparent 0);
+            background-size: 75px 75px, 75px 75px, 15px 15px, 15px 15px;
+        }
+        
+        .bg24 {
+            background: #655;
+            background-image: radial-gradient(tan 30%, transparent 0);
+            background-size: 30px 30px;
+        }
+        
+        .bg25 {
+            background: #655;
+            background-image: radial-gradient(tan 30%, transparent 0), radial-gradient(tan 30%, transparent 0);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+        
+        .bg26 {
+            background: #eee;
+            background-image: linear-gradient(45deg, #bbb 25%, transparent 0), linear-gradient(45deg, transparent 75%, #bbb 0), linear-gradient(45deg, #bbb 25%, transparent 0), linear-gradient(45deg, transparent 75%, #bbb 0);
+            background-position: 0 0, 15px 15px, 15px 15px, 30px 30px;
+            background-size: 30px 30px;
+        }
+        
+        .bg27 {
+            background: #eee;
+            background-image: linear-gradient(45deg, rgba(0, 0, 0, .25) 25%, transparent 0, transparent 75%, rgba(0, 0, 0, .25) 0), linear-gradient(45deg, rgba(0, 0, 0, .25) 25%, transparent 0, transparent 75%, rgba(0, 0, 0, .25) 0);
+            background-position: 0 0, 15px 15px;
+            background-size: 30px 30px;
+        }
+        
+        .bg28 {
+            background: hsl(20, 40%, 90%);
+            background-image: linear-gradient(90deg, #fb3 10px, transparent 0), linear-gradient(90deg, #ab4 20px, transparent 0), linear-gradient(90deg, #655 20px, transparent 0);
+            background-size: 80px 100%, 60px 100%, 40px 100%
+        }
+        
+        .q1 {
+            background: #58a;
+            background: linear-gradient(-45deg, transparent 15px, #58a 0);
+        }
+        
+        .q2 {
+            background: #58a;
+            background: linear-gradient(-45deg, transparent 15px, #58a 0), linear-gradient(45deg, transparent 15px, #655 0);
+        }
+        
+        .q3 {
+            background: #58a;
+            background: linear-gradient(135deg, transparent 15px, #58a 0) top left, linear-gradient(-135deg, transparent 15px, #58a 0) top right, linear-gradient(-45deg, transparent 15px, #58a 0) bottom right, linear-gradient(45deg, transparent 15px, #58a 0) bottom left;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+        }
+        
+        .q4 {
+            background: #58a;
+            background: radial-gradient(circle at top left, transparent 15px, #58a 0) top left, radial-gradient(circle at top right, transparent 15px, #58a 0) top right, radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom right, radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+        }
