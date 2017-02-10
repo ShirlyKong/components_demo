@@ -2,7 +2,9 @@ import * as React from 'react';
 import $ from 'jquery';
 import { DatePicker, Modal, Button, Input, Row, Col, Checkbox, Radio, message, Popconfirm } from 'antd';
 import 'fullcalendar/dist/fullcalendar.min.js';
+import 'fullcalendar/dist/locale/zh-cn';
 import 'fullcalendar/dist/fullcalendar.min.css';
+import './jquery-ui.min.js';
 import './calendar.css';
 export default class Func2 extends React.Component {
     constructor(props) {
@@ -106,7 +108,7 @@ export default class Func2 extends React.Component {
             _start,
             nextId
         } = this.state;
-        if (title == '') {
+        if (/^\s*$/.test(title)) {
             message.config({ top: 100 });
             message.error('请输入日程内容!');
             return;
@@ -196,17 +198,55 @@ export default class Func2 extends React.Component {
         this.setState({
             nextId,
         })
+        $('#external-events .fc-event').each(function() {
+
+          // store data so the calendar knows to render an event upon drop
+          $(this).data('event', {
+            title: $.trim($(this).text()), // use the element's text as the event title
+            stick: true, // maintain when user navigates (see docs on the renderEvent method)
+          });
+
+          $(this).draggable({
+            zIndex: 999,
+            revert: true,      
+            revertDuration: 0 
+          });
+
+        });
+
         this.calendar = $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: ''
+                right: 'list'
             },
             editable: true,
             dragOpacity: {
                 agenda: .5,
                 '': .6
             },
+            droppable: true,
+
+            buttonText: {
+              today:'返回今天',
+            },
+            drop: function(starttime) {
+              // is the "remove after drop" checkbox checked?
+              if ($('#drop-remove').is(':checked')) {
+                // if so, remove the element from the "Draggable Events" list
+                $(this).remove();
+              }
+              const title = $(this).text();
+              const start = starttime.format('YYYY-MM-DD HH:mm');
+              const end = null;
+              const allDay = true;
+              const color = '#3a87ad';
+              const id = that.state.nextId;
+              const action = 'add';
+              
+              console.log({action, title, allDay, color, id, start, end});
+            },
+
             eventDrop: function(event) {
                 let { title, allDay, color, id, start, end } = event;
 
@@ -254,6 +294,7 @@ export default class Func2 extends React.Component {
             //   console.log(date); //点击的日期
             // },
             eventClick: function(calEvent, jsEvent, view) { //点击某一个事件
+              console.log(calEvent);
                 const { _allDay, _end, _id, _start, start, end, title, color, allDay, id } = calEvent;
                 const isEnd = !!end;
                 that.setState({
@@ -311,7 +352,21 @@ export default class Func2 extends React.Component {
         }
         return (
             <div>
-          <div id='calendar' style={{width:1000}}></div>
+
+          <div id='external-events'>
+            <h4>Draggable Events</h4>
+            <div className='fc-event'>My Event 1</div>
+            <div className='fc-event'>My Event 2</div>
+            <div className='fc-event'>My Event 3</div>
+            <div className='fc-event'>My Event 4</div>
+            <div className='fc-event'>My Event 5</div>
+            <p>
+              <label><input type='checkbox' id='drop-remove' />
+              拖拽后删除</label>
+            </p>
+          </div>
+
+          <div id='calendar' ></div>
           <Modal title={calEvent} visible={this.state.visible}
             onCancel={this.handleCancel.bind(this)}
             footer={footer}
@@ -354,13 +409,14 @@ export default class Func2 extends React.Component {
                  <Radio.Group onChange={e=>this.formChange('color',e.target.value)} value={this.state.color}>
                     <Radio value="#360"><span style={{color:'#360',fontSize:'15px'}}>■</span></Radio>
                     <Radio value='#06c'><span style={{color:'#06c',fontSize:'15px'}}>■</span></Radio>
+                    <Radio value='#3a87ad'><span style={{color:'#3a87ad',fontSize:'15px'}}>■</span></Radio>
                     <Radio value='#f30'><span style={{color:'#f30',fontSize:'15px'}}>■</span></Radio>
                 </Radio.Group>
               </Col>
             </Row>
             <Row>
               <Col span={8}><Checkbox onChange={e=>{this.formChange('allDay',e.target.checked)}} checked={this.state.allDay}>全天</Checkbox></Col>
-              <Col span={8}><Checkbox onChange={e=>{this.formChange('isEnd',e.target.checked)}} checked={this.state.isEnd}>结束时间</Checkbox></Col>
+              <Col span={8}><Checkbox onChange={e=>{this.formChange('isEnd',e.target.checked);this.state.isEnd === false && this.formChange('end',null)}} checked={this.state.isEnd}>结束时间</Checkbox></Col>
             </Row>
           </Modal>
         </div>
