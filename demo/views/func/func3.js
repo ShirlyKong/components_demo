@@ -27,7 +27,7 @@ export default class Func3 extends React.Component {
       end: null,
       title: '',
       color: "#360",
-      allDay: false,
+      allDay: true,
       content: '',
       id: null,
       isEnd: false,
@@ -45,7 +45,7 @@ export default class Func3 extends React.Component {
       content: '',
       title: '',
       color: "#360",
-      allDay: false,
+      allDay: true,
       id: null,
       isEnd: false,
     })
