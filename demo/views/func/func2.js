@@ -14,7 +14,7 @@ export default class Func2 extends React.Component {
             end: null,
             title: '',
             color: "#360",
-            allDay: true,
+            allDay: false,
             nextId: '',
             id: null,
             isEnd: false,
@@ -35,7 +35,7 @@ export default class Func2 extends React.Component {
             end: null,
             title: '',
             color: "#360",
-            allDay: true,
+            allDay: false,
             id: null,
             isEnd: false,
             _allDay: null,
@@ -179,7 +179,7 @@ export default class Func2 extends React.Component {
             id: '0',
             title: "吃饭1",
             start: "2017-02-08 09:00",
-            end: "2017-02-08 08:00",
+            end: null,
             allDay: false,
             color: "#360"
         }, {

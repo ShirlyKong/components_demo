@@ -1,0 +1,153 @@
+
+.tree>ul>li{
+    width: 100px;
+    float: left;
+}
+
+.tree li ul{
+    transition:height 0.5s;
+    overflow: hidden;
+}
+.tree li ul.opening{
+    height: 500px;
+}
+.tree .textbox{
+    overflow: hidden;
+    width: 100%;
+}
+.tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 0 5px;
+    position:relative;
+    width: 100%;
+    white-space: nowrap;
+}
+.tree ul.opening > li {
+    animation: 0.8s open_li;
+}
+.tree ul.closeing > li {
+    animation: 0.8s close_li;
+}
+.tree ul.opening > li > .textbox{
+    animation: 0.8s open_li;
+}
+.tree ul.closeing > li > .textbox{
+    animation: 0.8s close_li;
+}
+
+@-webkit-keyframes open_li{
+    0%{  width:0; }
+    30%{  width:0; }
+    100%{ width:100%; }
+}
+@-webkit-keyframes close_li{
+    from{  width:100%; }
+    to{ width:0; }
+}
+.tree .rootul{
+    position: relative;
+}
+.tree .rootul::before{
+    z-index: -1;
+    content:"";
+    background: #739CCC;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 30px;
+}
+.tree .rootul::after{
+    content:"";
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
+}
+
+
+.tree li ul{
+  padding-left: 40px;
+}
+.tree li::before, .tree li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto;
+}
+.tree li::before {
+    border-left:2px solid #739CCC;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px;
+}
+.tree li::after {
+    border-top:2px solid #739CCC;
+    height:20px;
+    top:27px;
+    width:30px;
+    z-index: -1;
+}
+.tree li .btn {
+    border:1px solid #999;
+    border-radius:5px;
+    display:inline-block;
+    padding:3px 8px;
+    height: 30px;
+    line-height: 24px;
+    background: #fff;
+}
+.tree li .btn + div.text{
+    display: inline-block;
+}
+.tree li.parent_li>.textbox>.btn + div.text{
+    margin-left: 20px;
+    border: 1px solid #999;
+    text-indent: 20px;
+    height: 40px;
+    line-height: 40px;
+    border-radius:20px;
+    width: 120px;
+    font-size: 15px;
+    background: #98B967;
+
+}
+.tree li.parent_li>.textbox>.btn:after{
+  content: '';
+  position: absolute;
+  height: 20px;width: 20px;
+  background: #98B867;
+  left: 4px;
+  top: 4px;
+  border-radius: 50%;
+}
+.tree li.parent_li>.textbox>.btn {
+    cursor:pointer;
+    overflow: hidden;
+    position: absolute;
+    box-sizing: border-box;
+    border-radius:50%;
+    top: 15px;
+    left: 10px;
+    background: #fff;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: shake_green 1s infinite;
+}
+.tree>ul>li::before, .tree>ul>li::after {
+    border:0;
+}
+.tree li:last-child::before {
+    height:28px;
+}
+/* .tree li.parent_li>.btn:hover, .tree li.parent_li>.btn:hover+ul li .btn {
+    background:#eee;
+    border:1px solid #94a0b4;
+    color:#000;
+} */
+@-webkit-keyframes shake_green{ 
+  0% { box-shadow:0 0 0 0 rgba(115,156,204,1); }
+  100% { box-shadow:0 0 0 10px rgba(115,156,204,.0); }
+}
