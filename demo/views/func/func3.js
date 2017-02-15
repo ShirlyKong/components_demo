@@ -70,7 +70,7 @@ export default class Func3 extends React.Component {
       },
       success: function(data) {
         if(data == 0){
-              message.error('操作失败!');
+              //message.error('操作失败!');
             }
         $('#calendar').fullCalendar('refetchEvents');
       }
@@ -106,7 +106,7 @@ export default class Func3 extends React.Component {
       cache: false,
       success: function(data) {
         if(data == 0){
-              message.error('操作失败!');
+              //message.error('操作失败!');
             }
         $('#calendar').fullCalendar('refetchEvents');
       }
@@ -125,6 +125,17 @@ export default class Func3 extends React.Component {
       isEnd,
       content
     } = this.state;
+    console.log({
+      action,
+      start,
+      end,
+      title,
+      color,
+      allDay,
+      id,
+      isEnd,
+      content
+    });
     if (/^\s*$/.test(title)) {
       message.config({
         top: 100
@@ -139,10 +150,21 @@ export default class Func3 extends React.Component {
       message.error('请选择开始时间!');
       return;
     }
+    if (!end&&isEnd) {
+      message.config({
+        top: 100
+      });
+      message.error('请选择结束时间!');
+      return;
+    }
     switch (action) {
       case 'add':
         start = start && (start = start.format('YYYY-MM-DD HH:mm'));
         end = isEnd ? end = end.format('YYYY-MM-DD HH:mm') : null;
+        if(start.split(' ')[0] == end.split(' ')[0] && allDay == true){
+          end =null;
+          isEnd =false;
+        }
         let postdata = {
           action,
           title,
@@ -152,6 +174,8 @@ export default class Func3 extends React.Component {
           end,
           content
         }; //此处数据用来通知后台修改数据 --- 新增数据
+        console.log(postdata);
+
         $.ajax({
           url: 'http://10.92.20.4/fullcal/demo/test.php',
           type: 'post',
@@ -159,7 +183,7 @@ export default class Func3 extends React.Component {
           data: postdata,
           success: function(data) {
             if(data == 0){
-              message.error('操作失败!');
+              //message.error('操作失败!');
             }
 
             $('#calendar').fullCalendar('refetchEvents');
@@ -171,6 +195,10 @@ export default class Func3 extends React.Component {
       case 'edit':
         start = start && (start = start.format('YYYY-MM-DD HH:mm'));
         end = isEnd ? end = end.format('YYYY-MM-DD HH:mm') : null;
+        if(start.split(' ')[0] == end.split(' ')[0] && allDay == true){
+          end =null;
+          isEnd =false;
+        }
         postdata = {
           action,
           title,
@@ -181,6 +209,7 @@ export default class Func3 extends React.Component {
           content,
           id
         }; //此处数据用来通知后台修改数据 --- 新增数据
+        console.log(postdata);
         $.ajax({
           url: 'http://10.92.20.4/fullcal/demo/test.php',
           type: 'post',
@@ -188,7 +217,7 @@ export default class Func3 extends React.Component {
           data: postdata,
           success: function(data) {
             if(data == 0){
-              message.error('操作失败!');
+              //message.error('当前未作修改或者当前事件不存在!');
             }
             $('#calendar').fullCalendar('refetchEvents');
           }
@@ -219,12 +248,12 @@ export default class Func3 extends React.Component {
         revertDuration: 0
       });
     });
-
+    
     this.calendar = $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'list'
+        right: 'month,basicWeek,basicDay listYear'
       },
       editable: true,
       dragOpacity: {
@@ -262,7 +291,7 @@ export default class Func3 extends React.Component {
           cache: false,
           success: function(data) {
             if(data == 0){
-              message.error('操作失败!');
+              //message.error('操作失败!');
             }
             $('#calendar').fullCalendar('refetchEvents');
             if ($('#drop-remove').is(':checked')) {
@@ -305,7 +334,7 @@ export default class Func3 extends React.Component {
           data: postdata,
           success: function(data) {
             if(data == 0){
-              message.error('操作失败!');
+              //message.error('操作失败!');
             }
             $('#calendar').fullCalendar('refetchEvents');
           }
@@ -341,19 +370,22 @@ export default class Func3 extends React.Component {
           data: postdata,
           success: function(data) {
             if(data == 0){
-              message.error('操作失败!');
+              //message.error('操作失败!');
             }
             $('#calendar').fullCalendar('refetchEvents');
           }
         })
       },
       selectable: true,
-      select: function(start, end) {
+      select: function(start, end,c,d) {
+        const day = (end-start)/86400000;
+        let isEnd = day == 1? false : true;
+        end = day == 1?null: end;
         that.setState({
           start,
           end,
           action: 'add',
-          isEnd: true
+          isEnd
         })
         that.showModal();
       },
@@ -361,6 +393,7 @@ export default class Func3 extends React.Component {
       //   console.log(date); //点击的日期
       // },
       eventClick: function(calEvent, jsEvent, view) { //点击某一个事件
+        console.log(calEvent);
         const {
           start,
           end,
@@ -392,7 +425,8 @@ export default class Func3 extends React.Component {
     if (!endValue || !startValue) {
       return false;
     }
-    return endValue.valueOf() <= startValue.valueOf();
+    console.log(startValue.valueOf());
+    return endValue.valueOf() < startValue.valueOf();
   }
   render() {
     const {
