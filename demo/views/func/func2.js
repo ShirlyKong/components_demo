@@ -4,7 +4,6 @@ import { DatePicker, Modal, Button, Input, Row, Col, Checkbox, Radio, message, P
 import 'fullcalendar/dist/fullcalendar.min.js';
 import 'fullcalendar/dist/locale/zh-cn';
 import 'fullcalendar/dist/fullcalendar.min.css';
-import './jquery-ui.min.js';
 import './calendar.css';
 export default class Func2 extends React.Component {
     constructor(props) {
@@ -231,6 +230,7 @@ export default class Func2 extends React.Component {
             buttonText: {
               today:'返回今天',
             },
+            // 左边拖到右边事件
             drop: function(starttime) {
                 console.log($(this).data('event'));
               if ($('#drop-remove').is(':checked')) {
@@ -243,10 +243,9 @@ export default class Func2 extends React.Component {
               const color = '#3a87ad';
               const id = that.state.nextId;
               const action = 'add';
-              
               console.log({action, title, allDay, color, id, start, end});
             },
-
+            // 日历内拖动事件
             eventDrop: function(event) {
                 let { title, allDay, color, id, start, end } = event;
 
@@ -264,6 +263,7 @@ export default class Func2 extends React.Component {
                 }); //此处数据用来通知后台修改数据
 
             },
+            // 日历拖拽事件
             eventResize: function(event) {
                 let { title, allDay, color, id, start, end } = event;
 
@@ -362,7 +362,7 @@ export default class Func2 extends React.Component {
             <div className='fc-event'>My Event 5</div>
             <p>
               <label><input type='checkbox' id='drop-remove' />
-              <span>拖拽后删除</span>
+              <span> 拖拽后删除</span>
               </label>
             </p>
           </div>
