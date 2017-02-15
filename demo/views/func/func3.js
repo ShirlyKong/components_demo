@@ -473,7 +473,7 @@ export default class Func3 extends React.Component {
               <div className='fc-event'>My Event 5</div>
             <p>
               <label><input type='checkbox' id='drop-remove' />
-              拖拽后删除</label>
+              <span>拖拽后删除</span></label>
             </p>
           </div>
 
@@ -482,7 +482,7 @@ export default class Func3 extends React.Component {
             onCancel={this.handleCancel.bind(this)}
             footer={footer}
           >
-            <Row>
+            <Row style={{marginBottom:8}}>
               <Col span={3}>日程标题：</Col>
               <Col span={18}>
                 {
@@ -497,7 +497,7 @@ export default class Func3 extends React.Component {
 
               </Col>
             </Row>
-            <Row>
+            <Row style={{marginBottom:8}}>
               <Col span={3}>日程内容：</Col>
               <Col span={18}>
                 {
@@ -512,7 +512,7 @@ export default class Func3 extends React.Component {
 
               </Col>
             </Row>
-            <Row>
+            <Row style={{marginBottom:8}}>
               <Col span={3}>开始时间：</Col>
               <Col span={18}>
                {
@@ -538,7 +538,7 @@ export default class Func3 extends React.Component {
               </Col>
             </Row>
             {this.state.isEnd ?
-            <Row>
+            <Row style={{marginBottom:8}}>
               <Col span={3}>结束时间：</Col>
               <Col span={18}>
                {
@@ -567,7 +567,7 @@ export default class Func3 extends React.Component {
             }
             {
             action == 'check'? '':[
-            <Row key='color'>
+            <Row key='color' style={{marginBottom:8}}>
               <Col span={3}>主题颜色：</Col>
               <Col span={18}>
                  <Radio.Group onChange={e=>this.formChange('color',e.target.value)} value={this.state.color}>
