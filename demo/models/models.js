@@ -23,6 +23,10 @@ export const sidebarMenu = [{
         url: '/function/function3',
         icon: 'fa fa-arrow-right',
         title: '功能3'
+    }, {
+        url: '/function/function4',
+        icon: 'fa fa-arrow-right',
+        title: 'timetable'
     }]
 }, {
     url: 'javascript:;',

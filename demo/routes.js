@@ -7,6 +7,7 @@ import {
   Func1,
   Func2,
   Func3,
+  Func4,
   UI1,
   UI2,
   UI3,
@@ -34,6 +35,7 @@ export default (
     <Route path="function/function1" component={Func1} />
     <Route path="function/function2" component={Func2} />
     <Route path="function/function3" component={Func3} />
+    <Route path="function/function4" component={Func4} />
   
     <Route path="ui/ui1" component={UI1} />
     <Route path="ui/ui2" component={UI2} />

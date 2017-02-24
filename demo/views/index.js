@@ -2,6 +2,7 @@ import Home from './home';
 import Func1 from './func/func1';
 import Func2 from './func/func2';
 import Func3 from './func/func3';
+import Func4 from './func/func4';
 import UI1 from './ui/ui1';
 import UI2 from './ui/ui2';
 import UI3 from './ui/ui3';
@@ -25,6 +26,7 @@ export{
   Func1,
   Func2,
   Func3,
+  Func4,
   UI1,
   UI2,
   UI3,
