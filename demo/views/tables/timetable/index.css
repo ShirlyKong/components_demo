@@ -1,0 +1,117 @@
+.time-table {}
+
+.time-table h1 {
+    padding: 10px 0px;
+}
+
+.time-table button {
+    padding: 4px 8px;
+    background: #eee;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.time-table button {
+    margin: 2px;
+}
+
+table#time-table {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+table#time-table th,
+table#time-table td {
+    border: 1px solid #cecece;
+    padding: 0px;
+    height: 40px;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+table#time-table td>* {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+table#time-table th {
+    background-color: #feffef;
+}
+
+table#time-table th.content-td {
+    width: 80px;
+    background-color: #65baff;
+    color: #fff;
+}
+
+table#time-table th.add-time {
+    text-align: left;
+}
+
+table#time-table th.operate {
+    width: 120px;
+}
+
+table#time-table th.add-time>a {
+    font-size: 20px;
+}
+
+table#time-table thead>tr>th:first-child,
+table#time-table thead>tr>th:last-child,
+table#time-table tr>th:first-child,
+table#time-table tr>td:last-child {
+    cursor: default;
+}
+
+table#time-table tr:nth-child(2n)>td.slt {
+    background-color: #6edccc;
+    /*     background: hsl(20, 40%, 90%);
+background-image: linear-gradient(90deg, #fb3 10px, transparent 0), linear-gradient(90deg, #ab4 20px, transparent 0), linear-gradient(90deg, #655 20px, transparent 0);
+background-size: 80px 100%, 60px 100%, 40px 100% */
+}
+
+table#time-table tr:nth-child(2n+1)>td.slt {
+    background-color: #dcb96e;
+    /* background: #eee;
+    background-image: linear-gradient(45deg, #bbb 25%, transparent 0), linear-gradient(45deg, transparent 75%, #bbb 0), linear-gradient(45deg, #bbb 25%, transparent 0), linear-gradient(45deg, transparent 75%, #bbb 0);
+    background-position: 0 0, 15px 15px, 15px 15px, 30px 30px;
+    background-size: 30px 30px; */
+}
+
+table#time-table.envent-table tbody>tr>th {
+    cursor: pointer;
+}
+
+.time-table ul.operations>li {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.time-table ul.operations>li:hover {
+    background: #61b7fd;
+    color: #fff;
+}
+
+.time-table input.dateipt {
+    padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.time-table input.dateipt:hover,
+.time-table input.dateipt:focus {
+    border-color: #108ee9;
+    box-shadow: 0 0 3px #ddd;
+}
+
+.time-table .toolbox a {
+    padding: 4px 10px;
+    margin-left: 10px;
+    border: 1px solid #ddd;
+}
+
+.time-table .toolbox a>i {
+    font-size: 18px;
+    font-weight: 600;
+}

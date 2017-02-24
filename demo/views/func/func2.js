@@ -4,7 +4,7 @@ import { DatePicker, Modal, Button, Input, Row, Col, Checkbox, Radio, message, P
 import 'fullcalendar/dist/fullcalendar.min.js';
 import 'fullcalendar/dist/locale/zh-cn';
 import 'fullcalendar/dist/fullcalendar.min.css';
-import './jquery-ui.min.js';
+// import './jquery-ui.min.js';
 import './calendar.css';
 export default class Func2 extends React.Component {
     constructor(props) {
@@ -164,7 +164,7 @@ export default class Func2 extends React.Component {
                 start && (start = start.format('YYYY-MM-DD HH:mm'));
                 end && (end = end.format('YYYY-MM-DD HH:mm'));
 
-                console.log({ action, title, allDay, color, id, start, end, });
+                console.log('XXXX', { action, title, allDay, color, id, start, end, });
                 //此处数据用来通知后台修改数据 --- 修改数据
 
                 break;
@@ -181,7 +181,7 @@ export default class Func2 extends React.Component {
             id: '0',
             title: "吃饭1",
             start: "2017-02-08 09:00",
-            content:'吃完了就睡',
+            content: '吃完了就睡',
             end: null,
             allDay: false,
             color: "#360"
@@ -201,17 +201,17 @@ export default class Func2 extends React.Component {
         })
         $('#external-events .fc-event').each(function() {
 
-          // store data so the calendar knows to render an event upon drop
-          $(this).data('event', {
-            title: $.trim($(this).text()), // use the element's text as the event title
-            stick: true, // maintain when user navigates (see docs on the renderEvent method)
-          });
+            // store data so the calendar knows to render an event upon drop
+            $(this).data('event', {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                stick: true, // maintain when user navigates (see docs on the renderEvent method)
+            });
 
-          $(this).draggable({
-            zIndex: 999,
-            revert: true,      
-            revertDuration: 0 
-          });
+            $(this).draggable({
+                zIndex: 999,
+                revert: true,
+                revertDuration: 0
+            });
 
         });
 
@@ -219,7 +219,7 @@ export default class Func2 extends React.Component {
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'list'
+                right: 'list, month,agendaWeek,agendaDay',
             },
             editable: true,
             dragOpacity: {
@@ -229,22 +229,22 @@ export default class Func2 extends React.Component {
             droppable: true,
 
             buttonText: {
-              today:'返回今天',
+                today: '返回今天',
             },
             drop: function(starttime) {
                 console.log($(this).data('event'));
-              if ($('#drop-remove').is(':checked')) {
-                $(this).remove();
-              }
-              const title = $(this).text();
-              const start = starttime.format('YYYY-MM-DD HH:mm');
-              const end = null;
-              const allDay = true;
-              const color = '#3a87ad';
-              const id = that.state.nextId;
-              const action = 'add';
-              
-              console.log({action, title, allDay, color, id, start, end});
+                if ($('#drop-remove').is(':checked')) {
+                    $(this).remove();
+                }
+                const title = $(this).text();
+                const start = starttime.format('YYYY-MM-DD HH:mm');
+                const end = null;
+                const allDay = true;
+                const color = '#3a87ad';
+                const id = that.state.nextId;
+                const action = 'add';
+
+                console.log({ action, title, allDay, color, id, start, end });
             },
 
             eventDrop: function(event) {
@@ -294,8 +294,8 @@ export default class Func2 extends React.Component {
             //   console.log(date); //点击的日期
             // },
             eventClick: function(calEvent, jsEvent, view) { //点击某一个事件
-              console.log(calEvent);
-                const { _allDay, _end, _id, _start, start, content,end, title, color, allDay, id } = calEvent;
+                console.log(calEvent);
+                const { _allDay, _end, _id, _start, start, content, end, title, color, allDay, id } = calEvent;
                 const isEnd = !!end;
                 that.setState({
                     action: 'check',
