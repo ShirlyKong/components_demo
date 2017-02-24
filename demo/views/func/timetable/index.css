@@ -1,0 +1,12 @@
+div.date-s.date-selected:after{
+  content:'√';
+  color: green;
+}
+div.date-s.date-unselected:after{
+  content:'×';
+  color: red;
+}
+div.date-s{
+  text-align: center;
+  vertical-align: middle;
+}
