@@ -33,6 +33,13 @@ export default class TimeTable extends React.Component {
         data
       })
     }
+    changeDate(k){
+      let start = this.state.start;
+      start.add(k,'days');
+      this.setState({
+        start
+      })
+    }
     dateListToggle(i,d){
       let data = this.state.data;
       if(data[i].dataList.includes(d)){
@@ -76,6 +83,7 @@ export default class TimeTable extends React.Component {
       const dataSource = this.state.data.map((v,i)=>({key:i}));
       return (
         <div>
+          <Button onClick={()=>this.changeDate(-10)}>&lt;</Button><Button onClick={()=>this.changeDate(10)}>&gt;</Button>
           <Table columns={columns} dataSource={dataSource} pagination={false}/>
           <Button onClick={e=>{this.addRow()}}>增加一行</Button>
         </div>
