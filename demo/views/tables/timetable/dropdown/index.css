@@ -1,6 +1,7 @@
 .dropdown {
     z-index: 1;
     position: relative;
+    display: inline-table;
 }
 
 .dropdown>.drop-trigger {

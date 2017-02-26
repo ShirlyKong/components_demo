@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './index.css';
-
+import moment from 'moment';
 import {
     getDayList,
     getDayListE,
     getResult,
     initSelected,
-    addDays
+    addDays,
+    getDate
 } from './functions';
 
 import Dropdown from './dropdown/index';
@@ -31,9 +32,8 @@ export default class EventTable extends Component {
     };
     constructor(props) {
         super(props);
-        const rangeDate = this.props.rangeDate || ["2015-09-01", "2015-09-15"];
-        const dayList = getDayList(rangeDate[0], rangeDate[1]);
         const eventList = this.props.events || [];
+        const dayList = getDayListE(this.props.startdate, this.props.defaultlength);
         const {
             startdate,
             defaultlength,
@@ -47,21 +47,17 @@ export default class EventTable extends Component {
             initdata: initdata, //被选中的框显示
             selected: initSelected(eventList, dayList),
             mousedown: false,
-            reselected: getResult(initSelected(eventList, dayList), eventList, dayList),
-            dayList: dayList,
-            eventList: eventList,
+            eventList: [eventList[0]],
         };
     }
 
-    init() {
-        const rangeDate = this.props.rangeDate || ["2015-09-01", "2015-09-15"];
-        const dayList = getDayList(rangeDate[0], rangeDate[1]);
+    init = () => {
+
         const eventList = this.props.events || [];
+        const dayList = getDayListE(this.props.startdate, this.props.defaultlength);
         this.setState({
             selected: initSelected(eventList, dayList),
             mousedown: false,
-            // reselected: getResult(initSelected(eventList, dayList), eventList, dayList),
-            dayList: dayList,
             eventList: eventList,
         })
     }
@@ -81,7 +77,9 @@ export default class EventTable extends Component {
         if (this.state.mousedown) {
             this.tdClick(j, k);
         }
-        //选中单元格
+        //取消默认事件
+
+
     }
     colClick = (k) => {
         let curSelected = this.state.selected;
@@ -106,7 +104,6 @@ export default class EventTable extends Component {
         }
         this.setState({
                 selected: curSelected,
-                // reselected: getResult(curSelected, this.state.eventList, this.state.dayList),
             })
             //选中一整列
     }
@@ -116,7 +113,6 @@ export default class EventTable extends Component {
         curSelected[j][k] = curSelected[j][k] ? false : true;
         this.setState({
             selected: curSelected,
-            // reselected: getResult(curSelected, this.state.eventList, this.state.dayList),
         })
 
         //选中单元格
@@ -144,7 +140,6 @@ export default class EventTable extends Component {
         }
         this.setState({
             selected: curSelected,
-            // reselected: getResult(curSelected, this.state.eventList, this.state.dayList),
         })
         return false
     }
@@ -161,58 +156,62 @@ export default class EventTable extends Component {
     }
     dateChange = () => {
         let ob = this.refs.dateipt;
-        console.log("ssx", ob.value);
+        // console.log("ssx", ob.value);
         this.setState({
             startdate: ob.value,
         })
     }
     componentDidMount = () => {
         let ob = this.refs["time-table"];
-        /*        if (ob.all) {
-                    ob.onselectstart = function() {
-                        return false;
-                    }; //for ie
-                } else {
-                    ob.onmousedown = function() {
-                        return false;
-                    };
-                    ob.onmouseup = function() {
-                        return true;
-                    };
-                }
-                ob.onselectstart = new Function('event.returnValue=false;');*/
-        this.refs.dateipt.valueAsDate = new Date();
+        // this.refs.dateipt.valueAsDate = getDate(this.state.startdate);
+        document.onmouseup = this.MouseUp.bind(this);
     }
+    addRow() {
+        // let eventl = deepCopy(this.state.eventList);
+        let item = {};
+        item = deepCopy(this.state.eventList[0], item);
+        let lis = []
+        lis = deepCopy(this.state.eventList, lis);
+        lis.length++;
+        lis.push(item);
+        console.log("ssx", lis);
+        this.setState({
+            eventList: lis,
+        })
+    }
+    componentWillUnmount() {
+        document.onmouseup = null;
+    }
+
     render() {
         const {
             selected,
-            reselected,
             defaultlength,
             eventList
         } = this.state;
         const headers = this.props.headers.props.children;
         var that = this;
         const dayList = getDayListE(this.state.startdate, this.state.defaultlength);
-        // this.props.handleChange(this.state.reselected);
+
         return (
             <div className="time-table">
             <div className="toolbox">
                 <button className="init" onClick={that.init.bind(that)}>重置</button>
                 <input className="dateipt" ref="dateipt" type="date" name="start-date" onChange={this.dateChange.bind(this)} defaultValue={this.state.startdate}/>
                 <a onClick={this.next.bind(this,(0-defaultlength))}><i className="fa fa-angle-left"></i></a>
-                <a onClick={this.next.bind(this,defaultlength)}><i className="fa fa-angle-right"></i></a>
+                <a onClick={this.next.bind(this,defaultlength)}><i className="fa fa-angle-right"></i>下一天</a>
             </div>
             <table id="time-table" ref="time-table"  className="envent-table">
                 <thead>
                     <tr>
                         {
                            headers.map(function(n, p) {
-                            return <th key={p}>{n.props.txt}</th>;
+                            return <th key={p} >{n.props.txt}</th>;
                         })
                         }
                         {
                             dayList.map(function(s, k) {
-                                return <th className="content-td" key={s.name}  onClick={that.colClick.bind(that,k)}>{s.name}</th>;
+                                return <th className="content-td" key={k}  onClick={that.colClick.bind(that,k)}>{s.name}</th>;
                             })
                         }
                         <th className="add-time"><a onClick={that.next.bind(that,1)}><i className="fa fa-plus-square" ></i></a></th>
@@ -220,149 +219,60 @@ export default class EventTable extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                        {
-                            eventList.map(function(s,j) {
-                                let key=s.name;
-                              return <tr key={s.name}>
+                    {
+                        (eventList.length>0)&&eventList.map(function(s,j) {
+                              return (s)&& <tr key={j}>
                                      {/* <th key={s.name} onClick={that.eventClick.bind(that,s.id)} onContextMenu={that.rowClick.bind(that,j)}>{s.name}</th>*/}
-                        {
-                           headers.map(function(n, p) {
-                            return <th key={p}>{n}</th>;
-                        })
-                        }
-                                      { dayList.map(function(v, k) {
-                                        let str=s.name+","+v.name;
-                                        let curSelected=selected[j][k];
-                                        let cn="";
-                                        if(curSelected){
+                                    {
+                                       headers.map(function(n, p) {
+                                        return <th key={j+"-"+p}>{n}</th>;
+                                    })
+                                    }
+                                    { dayList.map(function(v, k) {
+                                          // let curSelected=selected[j][k];
+                                          let curSelected=false;
+                                          let cn="";
+                                         if(curSelected){
                                             cn="slt";
                                         }
-                                        return <td key={str} className={cn} onMouseDown={that.MouseDown.bind(that,j,k)} 
-                                        onMouseOver={that.MouseOver.bind(that,j,k)}
-                                        onMouseUp={that.MouseUp.bind(that,j,k)}
-                                         ></td>
-                                      })
+                                            return <td key={j+"-"+k} className={cn} onMouseDown={that.MouseDown.bind(that,j,k)}
+                                            onMouseOver={that.MouseOver.bind(that,j,k)}
+                                             ></td>
+                                          })
                                      }
 
-                                     <td>
-                                     <Dropdown triggerBar={<button>操作<i className="fa fa-angle-down"></i></button>}
-                                           trigger="hover">
+                                     <th>
+                                         <Dropdown triggerBar={<button>操作<i className="fa fa-angle-down"></i></button>}
+                                               trigger="hover">
                                             <ul className="operations">
                                                 <li>编辑</li>
-                                                <li>保存</li>
                                                 <li>提交</li>
                                                 <li>删除</li>
                                             </ul>
-                                     </Dropdown>
-                                     </td>
-                              </tr> ;
-                        })}
-                </tbody>
-            </table>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                        <table>
-                            <thead>
-                                <tr>
-                                {
-                                   headers.map(function(n, p) {
-                                    return <th key={p}>{n.props.txt}</th>;
-                                    })
-                                }
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                eventList.map(function(s,j) {
-                                        let key=s.name;
-                                      return <tr key={s.name}>
-                                             {/* <th key={s.name} onClick={that.eventClick.bind(that,s.id)} onContextMenu={that.rowClick.bind(that,j)}>{s.name}</th>*/}
-                                    {
-                                       headers.map(function(n, p) {
-                                        return <th key={p}>{n}</th>;})
-                                    }
-                                   
-                                    </tr>
-                                })
+                                         </Dropdown>
+                                     </th>
+                              </tr> 
+                        })
                         }
-
-                                    
-
-                            </tbody>
-                        </table>
-                        </td>
-                        <td>
-                            <div>
-                             <table>
-                              <thead>
-                               <tr>
-                               {
-
-                                dayList.map(function(s, k) {
-                                    return <th className="content-td" key={s.name}  onClick={that.colClick.bind(that,k)}>{s.name}</th>;
-                                 })
-                               }
-                               </tr>
-                             </thead>
-                            <tbody>
-                            {eventList.map(function(s,j) {
-                                        let key=s.name;
-                                      return <tr key={s.name}>
-                              
-
-                             { dayList.map(function(v, k) {
-                                        let str=s.name+","+v.name;
-                                        let curSelected=selected[j][k];
-                                        let cn="";
-                                        if(curSelected){
-                                            cn="slt";
-                                        }
-                                        return <td key={str} className={cn} onMouseDown={that.MouseDown.bind(that,j,k)} 
-                                        onMouseOver={that.MouseOver.bind(that,j,k)}
-                                        onMouseUp={that.MouseUp.bind(that,j,k)}
-                                         >xx</td>
-                                      })
+                        {headers.map(function(n, p) {
+                                if(p===0){
+                                    return <th key={p}><a onClick={that.addRow.bind(that)}><i className="fa fa-plus-square"></i></a></th>
+                                }
+                                return <th></th>;
+                            })
+                        }
+                        {dayList.map(function(v, k) {
+                                            return <td key={k} 
+                                             ></td>
+                                          })
                                      }
-                            </tr>})
-                        }
-                    
-                            </tbody>
-                        </table>
-                            </div>
-                        </td>
-                        <td>
-                        <table>
-                            <thead>
-                               <tr> <th className="add-time"><a onClick={that.next.bind(that,1)}><i className="fa fa-plus-square" ></i></a>
-                               </th></tr>
-                            </thead>
-                            <tbody>
-
-                               {eventList.map(function(s,j) {
-                                        let key=s.name;
-                                      return <tr key={s.name}>
-                                 <td>
-                                 <Dropdown triggerBar={<button>操作<i className="fa fa-angle-down"></i></button>}
-                                       trigger="hover">
-                                        <ul className="operations">
-                                            <li>编辑</li>
-                                            <li>保存</li>
-                                            <li>提交</li>
-                                            <li>删除</li>
-                                        </ul>
-                                 </Dropdown>
-                                 </td>
-                                 </tr>
-                                  })
-                                }
-                            </tbody>
-                        </table>
-                        </td>
-                    </tr>
+                
+                    <td></td>
+                
                 </tbody>
             </table>
+
+
       </div>
         )
     };
@@ -375,4 +285,18 @@ export class Header extends Component {
         return <div>{children}</div>
     }
 
+}
+
+
+function deepCopy(p, c) {　　　　
+    var c = c || ((p.constructor === Array) ? [] : {});　　　
+    for (var i in p) {　　　　　　
+        if (typeof p[i] === 'object') {　　　　　　　　
+            c[i] = (p[i].constructor === Array) ? [] : {};　　　　　　　　
+            deepCopy(p[i], c[i]);　　　　　　
+        } else {　　　　　　　　　
+            c[i] = p[i];　　　　　　
+        }　　　　
+    }　　　　
+    return c;　　
 }

@@ -109,5 +109,6 @@ export {
     getResult,
     initSelected,
     getDayListE,
-    addDays
+    addDays,
+    getDate
 }
