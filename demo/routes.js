@@ -1,34 +1,35 @@
 import * as React from 'react';
 import { Route, IndexRoute, Redirect, IndexRedirect } from 'react-router';
-const Base=require('./base').default;
+const Base = require('./base').default;
 
 import {
-  Home,
-  Func1,
-  Func2,
-  Func3,
-  Func4,
-  UI1,
-  UI2,
-  UI3,
-  Plugin1,
-  Plugin2,
-  Plugin3,
-  Plugin4,
-  Tables,
-  Datatables,
-  BStables,
-  Highcharts,
-  Echarts,
-  Recharts,
-  Easypie,
-  Yform,
-  Log,
-  ErrorPage
+    Home,
+    Func1,
+    Func2,
+    Func3,
+    Func4,
+    UI1,
+    UI2,
+    UI3,
+    Plugin1,
+    Plugin2,
+    Plugin3,
+    Plugin4,
+    Tables,
+    Datatables,
+    BStables,
+    Highcharts,
+    Echarts,
+    Recharts,
+    Easypie,
+    Yform,
+    Log,
+    ErrorPage,
+    Testkxl
 } from './views';
 
 export default (
-  <Route path="/" component={Base}>
+    <Route path="/" component={Base}>
 
     <IndexRoute component={Home} />
 
@@ -49,7 +50,8 @@ export default (
     <Route path="tables/yTables" component={Tables} />
     <Route path="tables/datatables" component={Datatables} />
     <Route path="tables/bstables" component={BStables} />
-  
+    <Route path="tables/testkxl" component={Testkxl} />
+    
     <Route path="charts/highcharts" component={Highcharts} />
     <Route path="charts/echarts" component={Echarts} />
     <Route path="charts/recharts" component={Recharts} />

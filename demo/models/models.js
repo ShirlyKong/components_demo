@@ -79,15 +79,19 @@ export const sidebarMenu = [{
     subMenu: [{
         url: '/tables/yTables',
         icon: 'fa fa-arrow-right',
-        title: 'yTables'
+        title: 'timesheet只读'
     }, {
         url: '/tables/datatables',
         icon: 'fa fa-arrow-right',
-        title: 'bsTables'
+        title: 'timesheet可编辑示例'
     }, {
         url: '/tables/bstables',
         icon: 'fa fa-arrow-right',
         title: 'bsTables'
+    }, {
+        url: '/tables/testkxl',
+        icon: 'fa fa-arrow-right',
+        title: 'testkxl'
     }]
 }, {
     url: 'javascript:;',

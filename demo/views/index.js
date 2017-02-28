@@ -13,6 +13,7 @@ import Plugin4 from './plugins/plugin4';
 import Tables from './tables/ytables';
 import Datatables from './tables/datatables';
 import BStables from './tables/bstables';
+import Testkxl from './tables/test';
 import Highcharts from './charts/highcharts';
 import Echarts from './charts/echarts';
 import Recharts from './charts/recharts';
@@ -21,27 +22,28 @@ import Yform from './form/yform';
 import Log from './log/log';
 import ErrorPage from './404/404';
 
-export{
-	Home,
-  Func1,
-  Func2,
-  Func3,
-  Func4,
-  UI1,
-  UI2,
-  UI3,
-  Plugin1,
-  Plugin2,
-  Plugin3,
-  Plugin4,
-  Tables,
-  Datatables,
-  BStables,
-  Highcharts,
-  Echarts,
-  Recharts,
-  Easypie,
-  Yform,
-  Log,
-  ErrorPage
+export {
+    Home,
+    Func1,
+    Func2,
+    Func3,
+    Func4,
+    UI1,
+    UI2,
+    UI3,
+    Plugin1,
+    Plugin2,
+    Plugin3,
+    Plugin4,
+    Tables,
+    Datatables,
+    BStables,
+    Highcharts,
+    Echarts,
+    Recharts,
+    Easypie,
+    Yform,
+    Log,
+    ErrorPage,
+    Testkxl
 }
