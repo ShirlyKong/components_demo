@@ -5,17 +5,17 @@ import EventTable, { Header } from './timetable/index';
 // import EventTable, { Header } from './timetable/my';
 const Option = Select.Option;
 
-const initdata = [{
+/*const initdata = [{
     item: ["1", "2", ["成员1"]],
     sub: true,
     datalist: ["2017-02-28", "2017-03-01"]
-}];
+}];*/
 
 export default class Func4 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: initdata || [],
+            data: [],
             options: [],
         }
     }

@@ -67,14 +67,38 @@ export default class EventTable extends Component {
     }
     addRow = () => {
         let data = this.state.data;
+        let headers = this.props.headers;
+        let item = [];
+        headers[0].props.children.map(function(s, j) {
+                return item.push([]);
+            })
+            // debugger;
         data.push({
-            item: ["", "", []],
+            item: item,
             sub: false,
             datalist: []
         });
         this.setState({ data: data });
         this.props.handleChange(this.state.data);
     }
+    inserRow = (j) => {
+
+        let data = this.state.data;
+        let headers = this.props.headers;
+        let item = [];
+        headers[0].props.children.map(function(s, j) {
+            return item.push([]);
+        });
+        let element = {
+            item: item,
+            sub: false,
+            datalist: []
+        };
+        data.insert(j + 1, element);
+        this.setState({ data: data });
+        this.props.handleChange(this.state.data);
+    }
+
 
     deleteRow = (j) => {
         let data = this.state.data;
@@ -192,6 +216,7 @@ export default class EventTable extends Component {
                                             <ul className="operations">
                                                 <li onClick={that.rowedit.bind(that,j)}>编辑</li>
                                                 <li onClick={that.rowsave.bind(that,j)}>提交</li>
+                                                <li onClick={that.inserRow.bind(that,j)}>插入</li>
                                                 <li onClick={that.deleteRow.bind(that,j)}>删除</li>
                                             </ul>
                                          </Dropdown>
@@ -248,3 +273,6 @@ Array.prototype.remove = function(val) {
         this.splice(index, 1);
     }
 };
+Array.prototype.insert = function(index, item) {
+    this.splice(index, 0, item);
+}
