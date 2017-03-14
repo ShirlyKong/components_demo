@@ -14,6 +14,7 @@ import Tables from './tables/ytables';
 import Datatables from './tables/datatables';
 import BStables from './tables/bstables';
 import Testkxl from './tables/test';
+import TestEditor from './tables/wangEditor';
 import Highcharts from './charts/highcharts';
 import Echarts from './charts/echarts';
 import Recharts from './charts/recharts';
@@ -45,5 +46,6 @@ export {
     Yform,
     Log,
     ErrorPage,
-    Testkxl
+    Testkxl,
+    TestEditor
 }

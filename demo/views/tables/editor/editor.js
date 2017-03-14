@@ -1,5 +1,9 @@
- import React, { Component } from 'react';
- import { editor } from 'wangEditor';
+ import React, {
+     Component
+ } from 'react';
+ import {
+     editor
+ } from 'wangEditor';
  import './editor.less';
  export default class Editor extends Component {
      componentDidMount() {
@@ -35,8 +39,8 @@
          this.editor.$txt.html('<div><br></div>');
      }
      saveContent() {
-         let content = this.editor.$txt.html()
-             // console.log(this.editor.$txt.html());
+         let content = this.editor.$txt.html();
+         // console.log(this.editor.$txt.html());
          this.props.onSave(content);
      }
      render() {

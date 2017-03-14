@@ -25,7 +25,8 @@ import {
     Yform,
     Log,
     ErrorPage,
-    Testkxl
+    Testkxl,
+    TestEditor,
 } from './views';
 
 export default (
@@ -51,7 +52,7 @@ export default (
     <Route path="tables/datatables" component={Datatables} />
     <Route path="tables/bstables" component={BStables} />
     <Route path="tables/testkxl" component={Testkxl} />
-    
+     <Route path="tables/testeditor" component={TestEditor} />
     <Route path="charts/highcharts" component={Highcharts} />
     <Route path="charts/echarts" component={Echarts} />
     <Route path="charts/recharts" component={Recharts} />

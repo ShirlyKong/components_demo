@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Editor from './editor/editor';
+import ServiceFrom from './myform/myform';
+import { Button } from 'antd';
+import { formItems, formItems2 } from './testdata.js';
 export default class BStables extends Component {
     constructor(props) {
         super(props);
@@ -7,36 +10,30 @@ export default class BStables extends Component {
             content: "",
         }
     }
-    onChange(e) { //输出结果
-        this.setState({
-            content: e,
-        })
+    sub = () => {
+        console.log("ss", this.refs.sform1); //处理调用子组件的校验方法
+        this.refs.sform1.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of formxxx: ', values);
+            }
+        });;
     }
-    onSave(e) {
-        console.log("提交内容", e);
+    sub2 = () => {
+        console.log("ss", this.refs.sform2); //处理调用子组件的校验方法
+        this.refs.sform2.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of formxxx: ', values);
+            }
+        });;
     }
     render() {
-        //1.0 仅仅配置菜单和图片上传路径 禁用等功能
-        const config = {
-            // lang: "en",
-            uploadImgUrl: '',
-            uploadParams: {
-                token: 'abcdefg',
-                user: 'wangfupeng1988'
-            },
-            uploadHeaders: {
-                'Accept': 'text/x-json'
-            },
-        };
         return (
             <div>
-                    <Editor id="editor1" config={config} 
-                    onChange={this.onChange.bind(this)} 
-                    onSave={this.onChange.bind(this)}
-                    content={this.state.content}
-                    style={{height:500}}
-                    hasToolbox/>
-                  </div>
+                <ServiceFrom ref="sform1" formItems={formItems}/>
+                <Button onClick={this.sub.bind(this)}>提交1</Button>
+                 <ServiceFrom ref="sform2" formItems={formItems2}/>
+                <Button onClick={this.sub2.bind(this)}>提交2</Button>
+            </div>
         )
     };
 }

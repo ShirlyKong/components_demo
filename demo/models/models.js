@@ -91,7 +91,11 @@ export const sidebarMenu = [{
     }, {
         url: '/tables/testkxl',
         icon: 'fa fa-arrow-right',
-        title: 'testkxl'
+        title: 'test表单'
+    }, {
+        url: '/tables/testeditor',
+        icon: 'fa fa-arrow-right',
+        title: '富文本编辑框'
     }]
 }, {
     url: 'javascript:;',

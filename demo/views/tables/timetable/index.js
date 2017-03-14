@@ -81,6 +81,8 @@ export default class EventTable extends Component {
         this.setState({ data: data });
         this.props.handleChange(this.state.data);
     }
+
+    //插入行功能
     inserRow = (j) => {
 
         let data = this.state.data;
@@ -273,6 +275,7 @@ Array.prototype.remove = function(val) {
         this.splice(index, 1);
     }
 };
+//插入功能
 Array.prototype.insert = function(index, item) {
     this.splice(index, 0, item);
 }
